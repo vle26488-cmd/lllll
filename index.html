@@ -1,0 +1,1113 @@
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thư viện Âu Việt</title>
+
+<style>
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    color: #1e293b;
+    background:
+        radial-gradient(circle at top left, #c4b5fd, transparent 30%),
+        radial-gradient(circle at bottom right, #bfdbfe, transparent 30%),
+        linear-gradient(135deg, #eef2ff, #f5f3ff);
+    min-height: 100vh;
+}
+
+.hidden { display: none !important; }
+
+.container {
+    width: 96%;
+    max-width: 1500px;
+    margin: 20px auto;
+}
+
+.box {
+    background: white;
+    padding: 22px;
+    margin-bottom: 17px;
+    border: 1px solid #e0e7ff;
+    border-radius: 17px;
+    box-shadow: 0 5px 20px #312e8112;
+}
+
+.center { text-align: center; }
+
+.school {
+    color: #4338ca;
+    font-weight: bold;
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+h1, h2 { color: #312e81; }
+
+.library-title {
+    text-align: center;
+    font-size: 29px;
+    margin: 18px 0;
+}
+
+.hero {
+    background: linear-gradient(120deg, #312e81, #7c3aed, #2563eb);
+    color: white;
+    border-radius: 18px;
+    padding: 30px 20px;
+    margin-top: 15px;
+}
+
+.hero h1, .hero h2 { color: white; }
+.hero p { line-height: 1.8; }
+.hero-art { font-size: 55px; margin: 10px; }
+
+button {
+    border: none;
+    padding: 11px 15px;
+    margin: 4px;
+    border-radius: 8px;
+    color: white;
+    background: #4f46e5;
+    font-size: 13px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: .2s;
+}
+
+button:hover {
+    filter: brightness(.9);
+    transform: translateY(-1px);
+}
+
+button:disabled {
+    opacity: .6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.green { background: #16a34a; }
+.red { background: #dc2626; }
+.gray { background: #64748b; }
+.orange { background: #ea580c; }
+
+input, select {
+    width: 100%;
+    padding: 12px;
+    margin: 7px 0;
+    border: 1px solid #cbd5e1;
+    border-radius: 9px;
+    font-size: 15px;
+    background: white;
+}
+
+input:focus, select:focus {
+    outline: 2px solid #c7d2fe;
+    border-color: #6366f1;
+}
+
+.section-heading {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-bottom: 2px solid #e0e7ff;
+    padding-bottom: 12px;
+    margin-top: 0;
+}
+
+.section-icon {
+    width: 40px;
+    height: 40px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 11px;
+    background: #eef2ff;
+    font-size: 22px;
+    flex-shrink: 0;
+}
+
+.decor-row {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.decor-item {
+    padding: 12px 15px;
+    background: #f5f3ff;
+    border: 1px solid #ddd6fe;
+    border-radius: 11px;
+    color: #5b21b6;
+    font-size: 13px;
+}
+
+.quick-info, .stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+}
+
+.quick-info { margin-top: 16px; }
+
+.info-card, .stat {
+    padding: 14px 8px;
+    text-align: center;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #eef2ff, #faf5ff);
+    border: 1px solid #e0e7ff;
+}
+
+.info-card strong {
+    display: block;
+    font-size: 25px;
+    margin-bottom: 7px;
+    color: #4f46e5;
+}
+
+.stat b { font-size: 12px; }
+
+.number {
+    font-size: 26px;
+    font-weight: bold;
+    color: #4f46e5;
+    margin-top: 6px;
+}
+
+.admin-bottom-right {
+    position: fixed;
+    top: 12px;
+    right: 12px;
+    z-index: 1000;
+    text-align: center;
+}
+
+.admin-name {
+    padding: 8px 10px;
+    margin-bottom: 5px;
+    border-radius: 8px;
+    background: white;
+    color: #4338ca;
+    font-weight: bold;
+    font-size: 12px;
+    box-shadow: 0 3px 12px #0002;
+}
+
+#btnDangXuat { margin: 0; }
+
+.table-box {
+    height: 650px;
+    overflow: auto;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    background: white;
+}
+
+table {
+    width: 100%;
+    min-width: 1050px;
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+th {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    padding: 13px 10px;
+    color: white;
+    background: linear-gradient(90deg, #4338ca, #6366f1);
+    font-size: 13px;
+}
+
+td {
+    padding: 10px 8px;
+    text-align: center;
+    border-bottom: 1px solid #e2e8f0;
+    font-size: 13px;
+}
+
+tbody tr:nth-child(even) { background: #f8faff; }
+tbody tr:hover { background: #eef2ff; }
+
+.book-cover {
+    width: 88px;
+    height: 122px;
+    margin: auto;
+    border-radius: 4px 9px 9px 4px;
+    border-left: 5px solid #0003;
+    box-shadow: 2px 4px 8px #0003;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: hidden;
+    color: white;
+    position: relative;
+}
+
+.cover-art {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 47px;
+    text-shadow: 0 3px 8px #0008;
+}
+
+.cover-label {
+    z-index: 1;
+    position: relative;
+    text-align: center;
+    padding: 5px 2px 0;
+    font-size: 8px;
+    letter-spacing: 1px;
+    text-shadow: 0 1px 4px black;
+}
+
+.cover-title {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: 20px 4px 7px;
+    background: linear-gradient(transparent, #000d);
+    font-size: 10px;
+    line-height: 1.3;
+    font-weight: bold;
+    overflow-wrap: anywhere;
+}
+
+.book-name {
+    min-width: 155px;
+    max-width: 230px;
+    color: #312e81;
+    font-weight: bold;
+    line-height: 1.5;
+}
+
+.status-pill {
+    display: inline-block;
+    padding: 6px 9px;
+    border-radius: 20px;
+    background: #dcfce7;
+    color: #166534;
+    white-space: nowrap;
+    font-weight: bold;
+}
+
+.status-pill.out {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+.actions { min-width: 180px; }
+.actions button { padding: 8px 9px; font-size: 12px; }
+
+.stats-title {
+    margin: 0 0 12px;
+    font-size: 19px;
+    color: #4338ca;
+}
+
+.footer {
+    text-align: center;
+    background: linear-gradient(120deg, #312e81, #6d28d9);
+    color: white;
+    padding: 22px;
+    border-radius: 16px;
+    line-height: 1.9;
+}
+
+.footer strong { font-size: 22px; }
+.footer small { font-size: 15px; }
+
+.error { color: #dc2626; font-weight: bold; }
+
+.empty-state {
+    text-align: center;
+    padding: 30px;
+    color: #64748b;
+}
+
+.read-box {
+    background: #fffdf5;
+    border: 1px solid #e7d8b1;
+    border-radius: 14px;
+    padding: 24px;
+    margin: 15px 0;
+    line-height: 1.9;
+    box-shadow: 0 4px 15px #0000000a;
+}
+
+.read-box h3 {
+    text-align: center;
+    color: #4338ca;
+    font-size: 25px;
+}
+
+.read-content {
+    white-space: pre-wrap;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 17px;
+    line-height: 1.9;
+    color: #334155;
+}
+
+.read-notice {
+    color: #64748b;
+    font-size: 13px;
+}
+
+.read-link {
+    display: inline-block;
+    padding: 11px 15px;
+    margin: 5px;
+    background: #15803d;
+    color: white;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.read-link:hover { background: #166534; }
+
+.read-toolbar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin: 15px 0;
+}
+
+.read-toolbar label { font-weight: bold; }
+
+@media(max-width:700px) {
+    .container { width: 96%; margin: 10px auto; }
+    .box { padding: 14px; }
+    .library-title { font-size: 23px; }
+    .school { font-size: 11px; }
+    .hero { padding: 25px 12px; }
+    .hero h1 { font-size: 23px; }
+    .hero-art { font-size: 40px; }
+    .quick-info, .stats { gap: 6px; }
+    .info-card { font-size: 11px; padding: 10px 3px; }
+    .info-card strong { font-size: 20px; }
+    .stat { padding: 10px 3px; }
+    .stat b { font-size: 10px; }
+    .number { font-size: 22px; }
+    .table-box { height: 500px; }
+    .admin-bottom-right { top: 6px; right: 6px; }
+    .admin-name { font-size: 10px; padding: 5px; }
+    #btnDangXuat { font-size: 10px; padding: 7px; }
+    .read-box { padding: 15px; }
+    .read-content { font-size: 16px; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- TRANG CHỦ -->
+<div id="trangChu" class="container">
+    <div class="box">
+        <div class="school">
+            ÂU VIỆT - SỞ GIÁO DỤC VÀ ĐÀO TẠO TP. HỒ CHÍ MINH<br>
+            TRƯỜNG TRUNG CẤP ÂU VIỆT
+        </div>
+
+        <div class="hero center">
+            <div class="hero-art">📚 📖 ✨</div>
+            <h1>HỆ THỐNG THƯ VIỆN ÂU VIỆT</h1>
+            <p>Không gian tri thức · Khơi nguồn sáng tạo · Chắp cánh tương lai</p>
+            <button id="btnQuanTri">🔐 QUẢN TRỊ VIÊN</button>
+            <button id="btnNguoiDung" class="green">👤 NGƯỜI DÙNG</button>
+        </div>
+
+        <div class="quick-info">
+            <div class="info-card"><strong>📚</strong>Kho tàng tri thức</div>
+            <div class="info-card"><strong>💡</strong>Khơi nguồn sáng tạo</div>
+            <div class="info-card"><strong>🎓</strong>Vững bước tương lai</div>
+        </div>
+
+        <div class="decor-row">
+            <div class="decor-item">📖 Mỗi cuốn sách là một hành trình</div>
+            <div class="decor-item">🌱 Đọc sách để trưởng thành</div>
+            <div class="decor-item">🌟 Khám phá thế giới qua trang sách</div>
+        </div>
+    </div>
+</div>
+
+<!-- ĐĂNG NHẬP -->
+<div id="dangNhap" class="container hidden">
+    <div class="box center">
+        <div class="school">
+            ÂU VIỆT - SỞ GIÁO DỤC VÀ ĐÀO TẠO TP. HỒ CHÍ MINH<br>
+            TRƯỜNG TRUNG CẤP ÂU VIỆT
+        </div>
+        <div style="font-size:50px;margin-top:15px">🔐</div>
+        <h2>ĐĂNG NHẬP QUẢN TRỊ VIÊN</h2>
+        <p>Nhập mật khẩu quản trị để tiếp tục.</p>
+        <input id="matKhau" type="password" placeholder="Nhập mật khẩu">
+        <button id="btnDangNhap">ĐĂNG NHẬP</button>
+        <button id="btnQuayLai" class="gray">QUAY LẠI</button>
+        <p id="baoLoi" class="error"></p>
+    </div>
+</div>
+
+<!-- TRANG QUẢN TRỊ -->
+<div id="quanLy" class="container hidden">
+    <div class="box">
+        <div class="school">
+            ÂU VIỆT - SỞ GIÁO DỤC VÀ ĐÀO TẠO TP. HỒ CHÍ MINH<br>
+            TRƯỜNG TRUNG CẤP ÂU VIỆT
+        </div>
+        <h1 class="library-title">📚 QUẢN LÝ THƯ VIỆN</h1>
+        <div class="decor-row">
+            <div class="decor-item">📘 Quản lý kho sách</div>
+            <div class="decor-item">🔎 Tìm kiếm nhanh</div>
+            <div class="decor-item">📊 Theo dõi mượn trả</div>
+        </div>
+    </div>
+
+    <div class="box">
+        <h2 class="section-heading"><span class="section-icon">➕</span> THÊM SÁCH MỚI</h2>
+        <input id="tenSach" placeholder="Tên sách">
+        <input id="tacGia" placeholder="Tác giả">
+        <input id="theLoai" placeholder="Thể loại">
+        <input id="namXB" type="number" placeholder="Năm xuất bản">
+        <button id="btnThemSach" class="green">➕ THÊM SÁCH</button>
+        <button id="btnXoaTimKiem" class="gray">XÓA TÌM KIẾM</button>
+        <p>Số lượng sách: <b id="soLuong">15</b> / 15 cuốn</p>
+        <p id="thongBaoAdmin"></p>
+    </div>
+
+    <div class="box">
+        <h2 class="section-heading"><span class="section-icon">🔍</span> TÌM KIẾM SÁCH</h2>
+        <input id="timKiem" placeholder="Tìm theo tên sách, tác giả hoặc thể loại...">
+    </div>
+
+    <div class="box">
+        <h2 class="section-heading"><span class="section-icon">📖</span> DANH SÁCH SÁCH</h2>
+        <p>🖼️ Bìa minh họa · Cập nhật trạng thái mượn trả trực tiếp</p>
+        <div class="table-box">
+            <table>
+                <thead>
+                    <tr>
+                        <th>STT</th><th>Bìa sách</th><th>Tên sách</th>
+                        <th>Tác giả</th><th>Thể loại</th><th>Năm XB</th>
+                        <th>Trạng thái</th><th>Thao tác</th>
+                    </tr>
+                </thead>
+                <tbody id="danhSach"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="box">
+        <h2 class="stats-title">📊 THỐNG KÊ THƯ VIỆN</h2>
+        <div class="stats">
+            <div class="stat"><b>📚 TỔNG SÁCH</b><div id="tongSach" class="number">0</div></div>
+            <div class="stat"><b>📕 ĐANG MƯỢN</b><div id="dangMuon" class="number">0</div></div>
+            <div class="stat"><b>📗 CÓ SẴN</b><div id="coSan" class="number">0</div></div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <strong>GIA LỘC - PHÚC VĨNH</strong><br>
+        <small>TRUNG CẤP ÂU VIỆT · Chi tiết liên hệ: 0900374***</small><br>
+        <small>📚 Lan tỏa văn hóa đọc · Chắp cánh ước mơ</small>
+    </div>
+
+    <div class="admin-bottom-right">
+        <div class="admin-name">👤 QUẢN TRỊ VIÊN</div>
+        <button id="btnDangXuat" class="red">🚪 ĐĂNG XUẤT</button>
+    </div>
+</div>
+
+<!-- TRANG NGƯỜI DÙNG -->
+<div id="nguoiDung" class="container hidden">
+    <div class="box">
+        <div class="school">
+            ÂU VIỆT - SỞ GIÁO DỤC VÀ ĐÀO TẠO TP. HỒ CHÍ MINH<br>
+            TRƯỜNG TRUNG CẤP ÂU VIỆT
+        </div>
+        <h1 class="library-title">📚 THƯ VIỆN ÂU VIỆT</h1>
+
+        <div class="hero center">
+            <div class="hero-art">📚 🌟 📖</div>
+            <h2>CHÀO MỪNG BẠN ĐẾN VỚI THƯ VIỆN</h2>
+            <p>Khám phá sách hay, đọc thử trước khi lựa chọn và tìm hiểu những tác phẩm yêu thích.</p>
+        </div>
+
+        <div class="decor-row">
+            <div class="decor-item">📖 Đọc thử sách</div>
+            <div class="decor-item">🔍 Tìm kiếm dễ dàng</div>
+            <div class="decor-item">🌐 Khám phá nguồn đọc</div>
+        </div>
+
+        <div class="center" style="margin-top:15px">
+            <button id="btnThoatNguoiDung" class="red">🚪 THOÁT</button>
+        </div>
+    </div>
+
+    <div class="box">
+        <h2 class="section-heading"><span class="section-icon">🔍</span> TÌM SÁCH</h2>
+        <input id="timKiemUser" placeholder="Tìm theo tên sách, tác giả hoặc thể loại...">
+    </div>
+
+    <div class="box">
+        <h2 class="section-heading"><span class="section-icon">📚</span> SÁCH TRONG THƯ VIỆN</h2>
+        <p>Chọn <b>📖 Đọc thử</b> để xem phần giới thiệu và nội dung mẫu của sách.</p>
+        <div class="table-box">
+            <table>
+                <thead>
+                    <tr>
+                        <th>STT</th><th>Bìa sách</th><th>Tên sách</th>
+                        <th>Tác giả</th><th>Thể loại</th><th>Năm XB</th>
+                        <th>Trạng thái</th><th>Thao tác</th>
+                    </tr>
+                </thead>
+                <tbody id="danhSachUser"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- KHU VỰC ĐỌC THỬ -->
+    <div id="khuVucDoc" class="box hidden">
+        <h2 class="section-heading"><span class="section-icon">📖</span> GÓC ĐỌC THỬ SÁCH</h2>
+
+        <div class="read-box">
+            <h3 id="docTenSach">Tên sách</h3>
+            <p id="docTacGia" class="center"></p>
+
+            <div class="read-toolbar">
+                <label for="coChuDoc">Cỡ chữ:</label>
+                <select id="coChuDoc" style="width:auto">
+                    <option value="15">Nhỏ</option>
+                    <option value="17" selected>Vừa</option>
+                    <option value="20">Lớn</option>
+                    <option value="23">Rất lớn</option>
+                </select>
+            </div>
+
+            <div id="docNoiDung" class="read-content"></div>
+
+            <p class="read-notice">
+                Nội dung trong góc đọc là phần giới thiệu hoặc trích đoạn mẫu.
+                Liên kết bên dưới sẽ mở nguồn bên ngoài nếu đã được cung cấp.
+            </p>
+
+            <div class="center">
+                <a id="docLienKet" class="read-link hidden"
+                   href="#" target="_blank" rel="noopener noreferrer">
+                    🌐 MỞ NGUỒN ĐỌC SÁCH
+                </a>
+                <button id="btnDongDoc" class="gray">🔙 ĐÓNG ĐỌC THỬ</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="box">
+        <h2 class="stats-title">📊 THỐNG KÊ SÁCH</h2>
+        <div class="stats">
+            <div class="stat"><b>📚 TỔNG SÁCH</b><div id="userTong" class="number">0</div></div>
+            <div class="stat"><b>📕 ĐANG MƯỢN</b><div id="userMuon" class="number">0</div></div>
+            <div class="stat"><b>📗 CÓ SẴN</b><div id="userCoSan" class="number">0</div></div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <strong>GIA LỘC - PHÚC VĨNH</strong><br>
+        <small>TRUNG CẤP ÂU VIỆT · Chi tiết liên hệ: 0900374***</small><br>
+        <small>📚 Lan tỏa văn hóa đọc · Chắp cánh ước mơ</small>
+    </div>
+</div>
+
+<script>
+"use strict";
+
+const MAT_KHAU = "123456";
+const GIOI_HAN = 15;
+
+let sach = [
+ {ten:"Nhà Giả Kim",tacgia:"Paulo Coelho",theloai:"Tiểu thuyết",nam:1988,muon:false,emoji:"🧙",colors:["#92400e","#f59e0b"]},
+ {ten:"Dế Mèn Phiêu Lưu Ký",tacgia:"Tô Hoài",theloai:"Truyện thiếu nhi",nam:1941,muon:false,emoji:"🦗",colors:["#166534","#65a30d"]},
+ {ten:"Số Đỏ",tacgia:"Vũ Trọng Phụng",theloai:"Tiểu thuyết",nam:1936,muon:false,emoji:"🎭",colors:["#991b1b","#ef4444"]},
+ {ten:"Vợ chồng A Phủ",tacgia:"Tô Hoài",theloai:"Truyện ngắn",nam:1952,muon:false,emoji:"🏔️",colors:["#115e59","#14b8a6"]},
+ {ten:"Vợ nhặt",tacgia:"Kim Lân",theloai:"Truyện ngắn",nam:1962,muon:true,emoji:"🌾",colors:["#92400e","#fbbf24"]},
+ {ten:"Rừng xà nu",tacgia:"Nguyễn Trung Thành",theloai:"Truyện ngắn",nam:1965,muon:false,emoji:"🌲",colors:["#14532d","#16a34a"]},
+ {ten:"Những đứa con trong gia đình",tacgia:"Nguyễn Thi",theloai:"Truyện ngắn",nam:1966,muon:false,emoji:"👨‍👩‍👧",colors:["#1e3a8a","#60a5fa"]},
+ {ten:"Chiếc thuyền ngoài xa",tacgia:"Nguyễn Minh Châu",theloai:"Truyện ngắn",nam:1983,muon:false,emoji:"⛵",colors:["#164e63","#22d3ee"]},
+ {ten:"Người lái đò sông Đà",tacgia:"Nguyễn Tuân",theloai:"Tùy bút",nam:1960,muon:false,emoji:"🚣",colors:["#1d4ed8","#38bdf8"]},
+ {ten:"Tây Tiến",tacgia:"Quang Dũng",theloai:"Thơ",nam:1948,muon:false,emoji:"⛰️",colors:["#581c87","#c084fc"]},
+ {ten:"Việt Bắc",tacgia:"Tố Hữu",theloai:"Thơ",nam:1954,muon:false,emoji:"🌿",colors:["#166534","#4ade80"]},
+ {ten:"Đất Nước",tacgia:"Nguyễn Khoa Điềm",theloai:"Thơ",nam:1971,muon:false,emoji:"🇻🇳",colors:["#991b1b","#f87171"]},
+ {ten:"Sóng",tacgia:"Xuân Quỳnh",theloai:"Thơ",nam:1967,muon:false,emoji:"🌊",colors:["#1e40af","#38bdf8"]},
+ {ten:"Đây thôn Vĩ Dạ",tacgia:"Hàn Mặc Tử",theloai:"Thơ",nam:1938,muon:false,emoji:"🌙",colors:["#6b21a8","#f0abfc"]},
+ {ten:"Chí Phèo",tacgia:"Nam Cao",theloai:"Truyện ngắn",nam:1941,muon:false,emoji:"🎭",colors:["#7f1d1d","#fb923c"]}
+];
+
+/* Nội dung giới thiệu và đọc thử mẫu */
+const noiDungDocThu = {
+    "Nhà Giả Kim":
+`GIỚI THIỆU TÁC PHẨM
+
+Nhà Giả Kim của Paulo Coelho kể về Santiago, một chàng chăn cừu trẻ bắt đầu chuyến hành trình tìm kiếm kho báu. Trên đường đi, cậu gặp nhiều con người và trải nghiệm khiến mình hiểu thêm về ước mơ, tình yêu và ý nghĩa của cuộc sống.
+
+ĐIỀU GÌ LÀM NÊN SỨC HẤP DẪN?
+
+Tác phẩm khuyến khích người đọc lắng nghe tiếng gọi bên trong mình, dũng cảm theo đuổi mục tiêu và học hỏi từ những điều xảy ra trên hành trình.
+
+CÂU HỎI SUY NGẪM
+
+Nếu có một ước mơ lớn, bạn sẽ bắt đầu thực hiện nó từ đâu?
+
+Đây là phần giới thiệu do thư viện biên soạn, không phải toàn văn cuốn sách.`,
+
+    "Dế Mèn Phiêu Lưu Ký":
+`GIỚI THIỆU TÁC PHẨM
+
+Dế Mèn Phiêu Lưu Ký của nhà văn Tô Hoài là tác phẩm nổi tiếng dành cho thiếu nhi. Qua những cuộc phiêu lưu của Dế Mèn, câu chuyện mở ra thế giới loài vật sinh động với nhiều tình huống thú vị.
+
+BÀI HỌC TỪ CÂU CHUYỆN
+
+Dế Mèn dần hiểu rằng sự kiêu căng và hành động thiếu suy nghĩ có thể gây tổn thương cho người khác. Trưởng thành là biết nhận lỗi, sửa sai và sống có trách nhiệm.
+
+CÂU HỎI ĐỌC SÁCH
+
+Theo bạn, một người cần làm gì để trở thành người bạn tốt?
+
+Phần trên là giới thiệu và câu hỏi đọc sách, không phải bản trích nguyên văn.`,
+
+    "Chí Phèo":
+`GIỚI THIỆU TÁC PHẨM
+
+Chí Phèo là truyện ngắn tiêu biểu của Nam Cao, phản ánh bi kịch của người nông dân trong xã hội cũ. Tác phẩm đặt ra những vấn đề sâu sắc về định kiến, sự cô lập và khát vọng được sống lương thiện.
+
+GIÁ TRỊ NHÂN ĐẠO
+
+Qua số phận nhân vật, người đọc suy nghĩ về cách xã hội đối xử với những con người bị đẩy ra bên lề và về nhu cầu được yêu thương, tôn trọng.
+
+CÂU HỎI SUY NGẪM
+
+Điều gì có thể giúp một người tìm lại niềm tin và cơ hội làm lại cuộc đời?
+
+Đây là phần giới thiệu tác phẩm, không phải toàn văn truyện.`,
+
+    "Số Đỏ":
+`GIỚI THIỆU TÁC PHẨM
+
+Số Đỏ của Vũ Trọng Phụng là tiểu thuyết trào phúng nổi tiếng. Tác phẩm sử dụng tiếng cười để phơi bày sự giả tạo, những nghịch lý và thói chạy theo vẻ bề ngoài trong xã hội.
+
+ĐIỂM ĐẶC SẮC
+
+Tình huống hài hước và nghệ thuật châm biếm khiến người đọc vừa bật cười vừa suy nghĩ về giá trị thật của con người.
+
+CÂU HỎI ĐỌC SÁCH
+
+Theo bạn, vì sao con người đôi khi đánh giá người khác chỉ qua vẻ bề ngoài?
+
+Đây là phần giới thiệu, không phải toàn văn tiểu thuyết.`,
+
+    "Vợ nhặt":
+`GIỚI THIỆU TÁC PHẨM
+
+Vợ nhặt của Kim Lân lấy bối cảnh nạn đói năm 1945. Trong hoàn cảnh thiếu thốn và đau thương, câu chuyện vẫn làm nổi bật tình người và khát vọng sống.
+
+GIÁ TRỊ CỦA TÁC PHẨM
+
+Những chi tiết đời thường giúp người đọc cảm nhận sự mong manh của cuộc sống, đồng thời thấy được niềm hy vọng có thể nảy nở ngay trong nghịch cảnh.
+
+CÂU HỎI SUY NGẪM
+
+Điều gì giúp con người giữ được hy vọng khi đối diện với khó khăn?
+
+Đây là phần giới thiệu tác phẩm, không phải toàn văn truyện.`,
+
+    "Vợ chồng A Phủ":
+`GIỚI THIỆU TÁC PHẨM
+
+Vợ chồng A Phủ của Tô Hoài khắc họa cuộc sống của người dân miền núi dưới áp bức, đồng thời thể hiện sức sống và khát vọng tự do.
+
+CHỦ ĐỀ
+
+Qua hành trình của Mị và A Phủ, tác phẩm cho thấy con người có thể tìm thấy sức mạnh để thay đổi số phận và đấu tranh cho quyền sống của mình.
+
+CÂU HỎI ĐỌC SÁCH
+
+Những điều gì giúp nhân vật Mị thay đổi từ cam chịu sang hành động?`,
+
+    "Rừng xà nu":
+`GIỚI THIỆU TÁC PHẨM
+
+Rừng xà nu của Nguyễn Trung Thành gắn với hình ảnh thiên nhiên Tây Nguyên và cuộc đấu tranh của người dân làng Xô Man.
+
+HÌNH TƯỢNG NỔI BẬT
+
+Cây xà nu vừa là hình ảnh thiên nhiên vừa mang ý nghĩa biểu tượng cho sức sống bền bỉ, tinh thần đoàn kết và sự tiếp nối giữa các thế hệ.
+
+CÂU HỎI SUY NGẪM
+
+Theo bạn, hình ảnh rừng xà nu góp phần thể hiện chủ đề tác phẩm như thế nào?`,
+
+    "Tây Tiến":
+`GIỚI THIỆU TÁC PHẨM
+
+Tây Tiến của Quang Dũng là bài thơ nổi tiếng về đoàn quân Tây Tiến và thiên nhiên miền Tây. Tác phẩm kết hợp vẻ đẹp hào hùng với cảm xúc lãng mạn, tạo nên hình tượng người lính giàu lý tưởng.
+
+GỢI Ý CẢM NHẬN
+
+Khi đọc bài thơ, hãy chú ý sự tương phản giữa thiên nhiên dữ dội và vẻ đẹp tâm hồn của người lính.
+
+CÂU HỎI ĐỌC SÁCH
+
+Những hình ảnh nào giúp bạn cảm nhận rõ nhất vẻ đẹp người lính Tây Tiến?`,
+
+    "Sóng":
+`GIỚI THIỆU TÁC PHẨM
+
+Sóng của Xuân Quỳnh thể hiện những cung bậc phong phú của tình yêu qua hình tượng sóng. Bài thơ gợi lên sự mãnh liệt, dịu dàng, nhớ nhung và khát vọng gắn bó.
+
+GỢI Ý CẢM NHẬN
+
+Hãy chú ý cách hình tượng sóng và tâm trạng người phụ nữ soi chiếu lẫn nhau trong bài thơ.
+
+CÂU HỎI SUY NGẪM
+
+Theo bạn, hình tượng sóng giúp thể hiện những khía cạnh nào của tình yêu?`
+};
+
+const nguonSach = {
+    "Dế Mèn Phiêu Lưu Ký": "https://vi.wikisource.org/",
+    "Chí Phèo": "https://vi.wikisource.org/",
+    "Tây Tiến": "https://vi.wikisource.org/",
+    "Sóng": "https://vi.wikisource.org/"
+};
+
+const $ = id => document.getElementById(id);
+
+function anTatCa() {
+    ["trangChu", "dangNhap", "quanLy", "nguoiDung"].forEach(id => {
+        $(id).classList.add("hidden");
+    });
+}
+
+function moTrang(id) {
+    anTatCa();
+    $(id).classList.remove("hidden");
+    window.scrollTo({top: 0, behavior: "smooth"});
+}
+
+$("btnQuanTri").onclick = () => {
+    moTrang("dangNhap");
+    $("baoLoi").textContent = "";
+    $("matKhau").value = "";
+    $("matKhau").focus();
+};
+
+function dangNhap() {
+    if ($("matKhau").value === MAT_KHAU) {
+        moTrang("quanLy");
+        $("matKhau").value = "";
+        $("timKiem").value = "";
+        $("baoLoi").textContent = "";
+        hienThiSach();
+    } else {
+        $("baoLoi").textContent = "❌ Mật khẩu không đúng!";
+        $("matKhau").select();
+    }
+}
+
+$("btnDangNhap").onclick = dangNhap;
+
+$("matKhau").addEventListener("keydown", event => {
+    if (event.key === "Enter") dangNhap();
+});
+
+$("btnQuayLai").onclick = () => moTrang("trangChu");
+$("btnDangXuat").onclick = () => moTrang("trangChu");
+
+$("btnNguoiDung").onclick = () => {
+    moTrang("nguoiDung");
+    $("timKiemUser").value = "";
+    dongDocThu();
+    hienThiUser();
+};
+
+$("btnThoatNguoiDung").onclick = () => {
+    dongDocThu();
+    moTrang("trangChu");
+};
+
+function thongKe() {
+    const tong = sach.length;
+    const muon = sach.filter(s => s.muon).length;
+    const coSan = tong - muon;
+
+    $("tongSach").textContent = tong;
+    $("dangMuon").textContent = muon;
+    $("coSan").textContent = coSan;
+
+    $("userTong").textContent = tong;
+    $("userMuon").textContent = muon;
+    $("userCoSan").textContent = coSan;
+    $("soLuong").textContent = tong;
+}
+
+function taoBia(s) {
+    const cover = document.createElement("div");
+    cover.className = "book-cover";
+    cover.style.background =
+        `linear-gradient(145deg, ${s.colors[0]}, ${s.colors[1]})`;
+
+    const art = document.createElement("div");
+    art.className = "cover-art";
+    art.textContent = s.emoji;
+
+    const label = document.createElement("div");
+    label.className = "cover-label";
+    label.textContent = "ÂU VIỆT";
+
+    const title = document.createElement("div");
+    title.className = "cover-title";
+    title.textContent = s.ten;
+
+    cover.append(art, label, title);
+    cover.setAttribute("role", "img");
+    cover.setAttribute("aria-label", "Bìa minh họa: " + s.ten);
+
+    return cover;
+}
+
+function taoO(text, className = "") {
+    const td = document.createElement("td");
+    td.textContent = text;
+    if (className) td.className = className;
+    return td;
+}
+
+function taoDong(s, isAdmin) {
+    const tr = document.createElement("tr");
+    const viTri = sach.indexOf(s);
+
+    tr.appendChild(taoO(String(viTri + 1)));
+
+    const coverCell = document.createElement("td");
+    coverCell.appendChild(taoBia(s));
+    tr.appendChild(coverCell);
+
+    tr.appendChild(taoO(s.ten, "book-name"));
+    tr.appendChild(taoO(s.tacgia));
+    tr.appendChild(taoO(s.theloai));
+    tr.appendChild(taoO(String(s.nam)));
+
+    const statusCell = document.createElement("td");
+    const status = document.createElement("span");
+    status.className = s.muon ? "status-pill out" : "status-pill";
+    status.textContent = s.muon ? "🔴 Đang mượn" : "🟢 Có sẵn";
+    statusCell.appendChild(status);
+    tr.appendChild(statusCell);
+
+    const actionCell = document.createElement("td");
+    actionCell.className = "actions";
+
+    if (isAdmin) {
+        const borrowBtn = document.createElement("button");
+        borrowBtn.className = s.muon ? "orange" : "green";
+        borrowBtn.textContent = s.muon ? "↩️ Trả sách" : "📚 Mượn";
+        borrowBtn.onclick = () => {
+            s.muon = !s.muon;
+            capNhatTatCa();
+        };
+
+        const deleteBtn = document.createElement("button");
+        deleteBtn.className = "red";
+        deleteBtn.textContent = "🗑️ Xóa";
+        deleteBtn.onclick = () => {
+            if (confirm("Bạn có chắc muốn xóa sách \"" + s.ten + "\"?")) {
+                sach.splice(sach.indexOf(s), 1);
+                capNhatTatCa();
+            }
+        };
+
+        actionCell.append(borrowBtn, deleteBtn);
+    } else {
+        const borrowBtn = document.createElement("button");
+        borrowBtn.className = s.muon ? "gray" : "green";
+        borrowBtn.textContent = s.muon ? "Đang được mượn" : "📚 Mượn sách";
+        borrowBtn.disabled = s.muon;
+
+        borrowBtn.onclick = () => {
+            if (s.muon) return;
+            s.muon = true;
+            alert("✅ Bạn đã mượn sách: " + s.ten);
+            capNhatTatCa();
+        };
+
+        const readBtn = document.createElement("button");
+        readBtn.className = "orange";
+        readBtn.textContent = "📖 Đọc thử";
+        readBtn.onclick = () => moDocThu(s);
+
+        actionCell.append(borrowBtn, readBtn);
+    }
+
+    tr.appendChild(actionCell);
+    return tr;
+}
+
+function renderTable(bodyId, keyword, isAdmin) {
+    const body = $(bodyId);
+    body.replaceChildren();
+
+    const q = keyword.trim().toLocaleLowerCase("vi");
+
+    const results = sach.filter(s =>
+        [s.ten, s.tacgia, s.theloai].some(value =>
+            value.toLocaleLowerCase("vi").includes(q)
+        )
+    );
+
+    if (results.length === 0) {
+        const tr = document.createElement("tr");
+        const td = document.createElement("td");
+        td.colSpan = 8;
+        td.className = "empty-state";
+        td.textContent = "📚 Không tìm thấy sách phù hợp.";
+        tr.appendChild(td);
+        body.appendChild(tr);
+        return;
+    }
+
+    results.forEach(s => body.appendChild(taoDong(s, isAdmin)));
+}
+
+function hienThiSach() {
+    renderTable("danhSach", $("timKiem").value, true);
+    thongKe();
+}
+
+function hienThiUser() {
+    renderTable("danhSachUser", $("timKiemUser").value, false);
+    thongKe();
+}
+
+function capNhatTatCa() {
+    hienThiSach();
+    hienThiUser();
+}
+
+/* THÊM SÁCH */
+$("btnThemSach").onclick = () => {
+    const ten = $("tenSach").value.trim();
+    const tacgia = $("tacGia").value.trim();
+    const theloai = $("theLoai").value.trim();
+    const namText = $("namXB").value.trim();
+    const nam = Number(namText);
+    const namHienTai = new Date().getFullYear();
+
+    if (sach.length >= GIOI_HAN) {
+        alert("⚠️ Thư viện đã đạt giới hạn 15 cuốn sách.");
+        return;
+    }
+
+    if (!ten || !tacgia || !theloai || !namText) {
+        alert("⚠️ Vui lòng nhập đầy đủ thông tin sách.");
+        return;
+    }
+
+    if (!Number.isInteger(nam) || nam < 1 || nam > namHienTai) {
+        alert("⚠️ Vui lòng nhập năm xuất bản hợp lệ.");
+        return;
+    }
+
+    sach.push({
+        ten,
+        tacgia,
+        theloai,
+        nam,
+        muon: false,
+        emoji: "📖",
+        colors: ["#4338ca", "#a78bfa"]
+    });
+
+    $("tenSach").value = "";
+    $("tacGia").value = "";
+    $("theLoai").value = "";
+    $("namXB").value = "";
+
+    $("thongBaoAdmin").textContent = "✅ Đã thêm sách thành công!";
+    $("thongBaoAdmin").style.color = "#15803d";
+
+    capNhatTatCa();
+};
+
+$("timKiem").addEventListener("input", hienThiSach);
+$("timKiemUser").addEventListener("input", hienThiUser);
+
+$("btnXoaTimKiem").onclick = () => {
+    $("timKiem").value = "";
+    $("thongBaoAdmin").textContent = "";
+    hienThiSach();
+};
+
+/* ĐỌC THỬ SÁCH */
+function moDocThu(s) {
+    $("khuVucDoc").classList.remove("hidden");
+    $("docTenSach").textContent = s.ten;
+    $("docTacGia").textContent =
+        "Tác giả: " + s.tacgia + " · Thể loại: " + s.theloai;
+
+    const noiDung =
+        noiDungDocThu[s.ten] ||
+        "GIỚI THIỆU SÁCH\n\n" +
+        "Tên sách: " + s.ten + "\n" +
+        "Tác giả: " + s.tacgia + "\n" +
+        "Thể loại: " + s.theloai + "\n" +
+        "Năm xuất bản: " + s.nam + "\n\n" +
+        "Đây là phần giới thiệu cơ bản cho cuốn sách. " +
+        "Bạn có thể bổ sung phần đọc thử được cấp phép hoặc " +
+        "liên kết đọc chính thức cho tác phẩm này.";
+
+    $("docNoiDung").textContent = noiDung;
+    $("docNoiDung").style.fontSize = $("coChuDoc").value + "px";
+
+    const link = $("docLienKet");
+    const url = nguonSach[s.ten];
+
+    if (url) {
+        link.href = url;
+        link.classList.remove("hidden");
+    } else {
+        link.removeAttribute("href");
+        link.classList.add("hidden");
+    }
+
+    $("khuVucDoc").scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+    });
+}
+
+function dongDocThu() {
+    $("khuVucDoc").classList.add("hidden");
+}
+
+$("btnDongDoc").onclick = dongDocThu;
+
+$("coChuDoc").addEventListener("change", () => {
+    $("docNoiDung").style.fontSize = $("coChuDoc").value + "px";
+});
+
+thongKe();
+</script>
+
+</body>
+</html>
